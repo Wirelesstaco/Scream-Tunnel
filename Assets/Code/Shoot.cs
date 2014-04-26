@@ -7,6 +7,7 @@ public class Shoot : MonoBehaviour {
 	public int Speed = 5;
 	public float StartSize = 1f;
 	public float GrowSpeed = 2f;
+	public int Player = 1;
 
 	private float ballSize = 1f;
 	private Vector3 startPos;
@@ -22,7 +23,19 @@ public class Shoot : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Control Spawner
-		Vector3 movement = new Vector3 (Input.GetAxis ("Horizontal") * Speed, Input.GetAxis ("Vertical") * Speed, 0);
+		float xMove = 0;
+		float yMove = 0;
+		int direction = 1;
+		if (Player == 1) {
+			xMove = Input.GetAxis ("Horizontal");
+			yMove = Input.GetAxis ("Vertical");
+
+		} else{
+			xMove = Input.GetAxis ("HorizontalP2");
+			yMove = Input.GetAxis ("VerticalP2");
+
+		}
+		Vector3 movement = new Vector3 (xMove * Speed, yMove * Speed, 0);
 		transform.Translate	(movement * Time.deltaTime);
 		UpdateIndicator ();
 
