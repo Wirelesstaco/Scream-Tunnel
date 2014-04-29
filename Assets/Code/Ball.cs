@@ -7,14 +7,27 @@ public class Ball : MonoBehaviour {
 	public Material Player1Mat;
 	public Material Player2Mat;
 
+	private float ballSize;
+
+	public float BallSize {
+		get {
+			return ballSize;
+		}
+	}
 	private int playerNumber = 0;
 	// Use this for initialization
-	public void Move (Vector3 direction, float ballSize,int playerNum) {
+	public void Move (Vector3 direction, float theBallSize,int playerNum) {
+		ballSize = theBallSize;
 		playerNumber = playerNum;
 		float fwdVelocity = Velicity - (ballSize/6);
 		Vector3 forceDirection = new Vector3(direction.x, direction.y, fwdVelocity *direction.z) * Power;
 		rigidbody.AddForce(forceDirection);
 		setMaterial();
+	}
+
+	private void Update()
+	{
+		RemoveMe ();
 	}
 
 	private void setMaterial() 
@@ -32,19 +45,41 @@ public class Ball : MonoBehaviour {
 			Destroy (this.gameObject);
 		}
 	}
-	public void test()
+	public void BallHit(Collider otherBall)
 	{
+	float otherBallSize = otherBall.transform.parent.GetComponent<Ball>().BallSize;
+		Debug.Log ("otherBall " + ballSize +" myBll " + otherBallSize);
+		//ballSize -= otherBallSize;
+		float newSize =0;
+		if(ballSize > otherBallSize) {
+			newSize -= otherBallSize;
+		}else {
+			newSize = 0;
+		}
+		//updateBallSize(newSize);
+		LerpScale (2.0f ,newSize);
+	}
+
+	private void updateBallSize(float newSize){
+		//Vector3 startSize = new Vector3( ballSize , ballSize , ballSize );
+		//Vector3 endSize = new Vector3( newSize , newSize , newSize );
+
+		transform.localScale = new Vector3( ballSize , ballSize , ballSize );
+	}
+
+	private void LerpScale(float time, float newSize)
+	{
+		Vector3 startSize = new Vector3( ballSize , ballSize , ballSize );
+		Vector3 endSize = new Vector3( newSize , newSize , newSize );
+		float startTime = time;
+
+		while (time > 0.0f)
+		{
+			time -= Time.deltaTime;
+
+			transform.localScale = Vector3.Lerp (endSize, startSize , time/startTime);
+
+		}
+	}
 	
-	}
-
-	private void Update()
-	{
-				RemoveMe ();
-	}
-
-	private void OnCollisionEnter(){
-		//Debug.Log ("hit");
-		//disable physic collisions
-		//collider.isTrigger = true;
-	}
 }

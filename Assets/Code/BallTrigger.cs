@@ -3,11 +3,9 @@ using System.Collections;
 
 public class BallTrigger : MonoBehaviour {
 
-
-	void OnTriggerEnter() 
+	//Fire event when other ball has been hit.
+	void OnTriggerEnter(Collider other) 
 	{
-
-
-		transform.parent.GetComponent<Ball>().test();
+		transform.parent.GetComponent<Ball>().BallHit(other);
 	}
 }
