@@ -32,14 +32,18 @@ public class Ball : MonoBehaviour {
 			Destroy (this.gameObject);
 		}
 	}
+	public void test()
+	{
+	
+	}
 
 	private void Update()
 	{
-		RemoveMe ();
+				RemoveMe ();
 	}
 
 	private void OnCollisionEnter(){
-		Debug.Log ("hit");
+		//Debug.Log ("hit");
 		//disable physic collisions
 		//collider.isTrigger = true;
 	}
