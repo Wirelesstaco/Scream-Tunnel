@@ -61,11 +61,11 @@ public class Player : MonoBehaviour {
 		if (Input.GetButtonDown (shoot) || Yelling) {
 			if(Yelling && !WasYelling){
 				WasYelling = true;
-			}
+			
 				//Set Start
 				startPos = transform.localPosition;
 				gameIndicator.renderer.enabled = true;
-				
+			}
 			}
 		//Shoot Ball	
 		if(Input.GetButtonUp (shoot) || !Yelling && WasYelling)
