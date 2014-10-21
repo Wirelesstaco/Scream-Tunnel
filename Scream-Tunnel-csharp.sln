@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{0FDF87A4-CFDB-0660-5B66-FF183597EBEF}") = "Scream-Tunnel", "Assembly-CSharp-vs.csproj", "{629700A9-B9E3-1F07-1C3B-0306D7BB8802}"
 EndProject
+Project("{0FDF87A4-CFDB-0660-5B66-FF183597EBEF}") = "Scream-Tunnel", "Assembly-CSharp-Editor-vs.csproj", "{5B377FF1-7A41-974F-74B9-91624BE35956}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,11 +15,15 @@ Global
 		{629700A9-B9E3-1F07-1C3B-0306D7BB8802}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{629700A9-B9E3-1F07-1C3B-0306D7BB8802}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{629700A9-B9E3-1F07-1C3B-0306D7BB8802}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B377FF1-7A41-974F-74B9-91624BE35956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B377FF1-7A41-974F-74B9-91624BE35956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B377FF1-7A41-974F-74B9-91624BE35956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B377FF1-7A41-974F-74B9-91624BE35956}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-											GlobalSection(MonoDevelopProperties) = preSolution
+																			GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

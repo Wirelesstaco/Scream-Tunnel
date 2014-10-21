@@ -15,7 +15,10 @@ public class Player : MonoBehaviour {
 	private GameObject gameIndicator;
 
 	private string shoot;
+	public int playerSign;
 
+	public bool Yelling = false;
+	public bool WasYelling = false;
 	void Start ()
 	{
 		gameIndicator = (GameObject)Instantiate (Indicator, transform.position, transform.rotation) as GameObject;
@@ -26,7 +29,7 @@ public class Player : MonoBehaviour {
 		//Control Spawner
 		float xMove = 0;
 		float yMove = 0;
-		int playerSign;
+	
 		if (PlayerNum == 1) {
 			xMove = Input.GetAxis ("Horizontal");
 			yMove = Input.GetAxis ("Vertical");
@@ -43,48 +46,7 @@ public class Player : MonoBehaviour {
 		Vector3 movement = new Vector3 (xMove * Speed, yMove * Speed, 0);
 		transform.Translate	(movement * Time.deltaTime);
 		UpdateIndicator ();
-
-		if (Input.GetButtonDown (shoot)) {
-			//Set Start
-			startPos = transform.localPosition;
-			gameIndicator.renderer.enabled = true;
-
-		}
-
-		if(Input.GetButtonUp (shoot))
-		{
-			gameIndicator.renderer.enabled = false;
-			//Shoot angle
-			endPos = transform.localPosition;
-
-	
-			Vector3 forceDirection = endPos - startPos;
-
-			//Set Z
-			forceDirection.z = playerSign;
-			Debug.Log (endPos.x);
-			Ball.transform.rotation = Quaternion.LookRotation(endPos);
-
-
-			//Ball scale
-			Ball.transform.localScale = new Vector3( ballSize , ballSize , ballSize );
-			GameObject instance = (GameObject)Instantiate (Ball, transform.position, transform.rotation) as GameObject;
-			instance.GetComponent<Ball>().Move(forceDirection , ballSize ,PlayerNum);
-
-			//Set Mass
-			instance.GetComponent<Rigidbody>().mass = ballSize;
-
-			//Rest ball size
-			ballSize = StartSize;
-
-		}
-
-		if (Input.GetButton (shoot)) 
-		{	
-			ballSize += GrowSpeed * Time.deltaTime;
-
-			UpdateIndicator();
-		}
+		shooting ();
 	}
 
 	void UpdateIndicator () 
@@ -93,4 +55,55 @@ public class Player : MonoBehaviour {
 		gameIndicator.transform.position = transform.position;
 
 	}
+
+	void shooting() {
+		//Get start angle Position
+		if (Input.GetButtonDown (shoot) || Yelling) {
+			if(Yelling && !WasYelling){
+				WasYelling = true;
+			}
+				//Set Start
+				startPos = transform.localPosition;
+				gameIndicator.renderer.enabled = true;
+				
+			}
+		//Shoot Ball	
+		if(Input.GetButtonUp (shoot) || !Yelling && WasYelling)
+			{
+			WasYelling = false;
+				gameIndicator.renderer.enabled = false;
+				//Shoot angle
+				endPos = transform.localPosition;
+				
+				
+				Vector3 forceDirection = endPos - startPos;
+				
+				//Set Z
+				forceDirection.z = playerSign;
+				Debug.Log (endPos.x);
+				Ball.transform.rotation = Quaternion.LookRotation(endPos);
+				
+				
+				//Ball scale
+				Ball.transform.localScale = new Vector3( ballSize , ballSize , ballSize );
+				GameObject instance = (GameObject)Instantiate (Ball, transform.position, transform.rotation) as GameObject;
+				instance.GetComponent<Ball>().Move(forceDirection , ballSize ,PlayerNum);
+				
+				//Set Mass
+				instance.GetComponent<Rigidbody>().mass = ballSize;
+				
+				//Rest ball size
+				ballSize = StartSize;
+				
+			}
+			//Charging 
+			if (Input.GetButton (shoot) || Yelling) 
+			{	
+				ballSize += GrowSpeed * Time.deltaTime;
+				
+				UpdateIndicator();
+			}
+		}
+
+
 }

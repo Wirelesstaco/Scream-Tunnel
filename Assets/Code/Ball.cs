@@ -46,7 +46,7 @@ public class Ball : MonoBehaviour {
 		}
 	}
 	public void BallHit(Collider otherBall)
-	{
+	{/*
 	float otherBallSize = otherBall.transform.parent.GetComponent<Ball>().BallSize;
 		Debug.Log ("otherBall " + ballSize +" myBll " + otherBallSize);
 		//ballSize -= otherBallSize;
@@ -57,7 +57,7 @@ public class Ball : MonoBehaviour {
 			newSize = 0;
 		}
 		//updateBallSize(newSize);
-		LerpScale (2.0f ,newSize);
+		LerpScale (2.0f ,newSize);I*/
 	}
 
 	private void updateBallSize(float newSize){
